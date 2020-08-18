@@ -7,9 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
 
-const filename = (extention) => {
-	isDev ? `bundle.${extention}` : `bundle.[hash].${extention}`;
-};
+// const filename = (ext) => {
+// 	isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+// };
 
 const jsLoaders = () => {
 	const loaders = [
@@ -33,7 +33,8 @@ module.exports = {
 	mode: 'development',
 	entry: [ '@babel/polyfill', './index.js' ],
 	output: {
-		filename: filename('js'),
+		// filename: filename('js'),
+		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 	resolve: {
@@ -66,7 +67,8 @@ module.exports = {
 			]
 		}),
 		new MiniCssExtractPlugin({
-			filename: filename('css')
+			// filename: filename('css')
+			filename: 'bundle.css'
 		})
 	],
 	module: {
@@ -81,9 +83,7 @@ module.exports = {
 							reloadAll: true
 						}
 					},
-					// Translates CSS into CommonJS
 					'css-loader',
-					// Compiles Sass to CSS
 					'sass-loader'
 				]
 			},
